@@ -15,13 +15,26 @@ dsh plugin --profile desktop add github:supart/dsh-h3-motion-transfer
 # 装完重启 DSH，技能就会出现
 ```
 
-前置条件：该 profile 所在环境里 **`pnpm` 与 `git` 都要在 `PATH` 上**（插件管理器用 pnpm 安装、用 git 拉取仓库）。DSH 桌面版自带的运行时可能只提供 `pnpm.mjs`，此时在 `~/.dsh/profiles/_shim/` 放一个包装脚本并把该目录加进 `PATH` 即可：
+前置条件：该 profile 所在环境里 **`pnpm` 与 `git` 都要在 `PATH` 上**（插件管理器用 pnpm 安装、用 git 拉取仓库）。DSH 桌面版自带的运行时只提供 `pnpm.mjs`，没有 `pnpm` 命令，所以需要自己补一个启动器：
 
 ```bat
-:: ~/.dsh/profiles/_shim/pnpm.cmd
+:: 放到一个已在 PATH 上的目录，例如 %USERPROFILE%\bin\pnpm.cmd
+:: （Windows 默认的用户 PATH 通常已包含 %USERPROFILE%\bin；也可用 setx PATH "%PATH%;%USERPROFILE%\bin" 追加）
 @echo off
-"C:\Program Files\nodejs\node.exe" "C:\Users\<你>\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\pnpm\bin\pnpm.mjs" %*
+setlocal
+set "NODE_EXE=%ProgramFiles%\nodejs\node.exe"
+if not exist "%NODE_EXE%" set "NODE_EXE=node"
+set "PNPM_MJS=%USERPROFILE%\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\pnpm\bin\pnpm.mjs"
+"%NODE_EXE%" "%PNPM_MJS%" %*
 ```
+
+核对方式（新开一个终端）：
+
+```bash
+pnpm --version     # 应打印版本号，例如 11.7.0
+```
+
+不想写启动器也可以 `npm i -g pnpm` 或 `corepack enable pnpm`，效果一样。
 
 装好后：
 
