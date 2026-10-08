@@ -111,7 +111,7 @@ This skill ships two tools in `tools/` under the skill's base directory reported
 
    `node <base>/tools/prefetch-ffmpeg.mjs`
 
-   to fetch both binaries into `tools/vendor/bin/<platform>-<arch>/` (tries a mirror, gyan.dev, BtbN nightly builds, then npm; honours `HTTPS_PROXY`; never fails an install). `node <base>/tools/check.mjs` then reports the resolved paths and sources in one screen, and `node <base>/tools/frames.mjs --doctor` additionally reports the `drawtext` font in use and whether the build has the `drawtext`, `tile`, `fps`, `scale` and `select` filters the sheets need.
+   to fetch both binaries into `tools/vendor/bin/<platform>-<arch>/` (tries a mirror, gyan.dev, BtbN nightly builds, then npm; honours `HTTPS_PROXY`; never fails an install). On a restricted network, `--url <archive>` takes any direct archive link (a release asset or your own mirror) and `--mirror <base-url>` expects `<platform>-<arch>.zip` under it. `node <base>/tools/check.mjs` then reports the resolved paths and sources in one screen, and `node <base>/tools/frames.mjs --doctor` additionally reports the `drawtext` font in use and whether the build has the `drawtext`, `tile`, `fps`, `scale` and `select` filters the sheets need.
 
 1. `tools/frames.mjs` — sample the clip, index every frame, build the contact sheets, and optionally render a motion preview. Give it the absolute path of the video delivered for this task, never a path left over from an earlier run.
 

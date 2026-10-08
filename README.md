@@ -10,9 +10,17 @@
 
 ```bash
 # 从 GitHub 装最新版（把 desktop 换成你自己的 profile 名）
-dsh plugin --profile desktop add github:<owner>/dsh-h3-motion-transfer
+dsh plugin --profile desktop add github:supart/dsh-h3-motion-transfer
 
 # 装完重启 DSH，技能就会出现
+```
+
+前置条件：该 profile 所在环境里 **`pnpm` 与 `git` 都要在 `PATH` 上**（插件管理器用 pnpm 安装、用 git 拉取仓库）。DSH 桌面版自带的运行时可能只提供 `pnpm.mjs`，此时在 `~/.dsh/profiles/_shim/` 放一个包装脚本并把该目录加进 `PATH` 即可：
+
+```bat
+:: ~/.dsh/profiles/_shim/pnpm.cmd
+@echo off
+"C:\Program Files\nodejs\node.exe" "C:\Users\<你>\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\pnpm\bin\pnpm.mjs" %*
 ```
 
 装好后：
@@ -61,18 +69,31 @@ node assets/tools/check.mjs
 node assets/tools/prefetch-ffmpeg.mjs
 ```
 
-脚本按「镜像 → gyan.dev（Windows）→ BtbN 每日构建（全平台）→ npm 包」的顺序尝试，把二进制放进 `assets/tools/vendor/bin/<平台>-<架构>/` 并写一份 `ffmpeg-path.json`，之后工具完全离线可用。它**不会因为失败而中断安装**（只有 `--strict` 才返回非 0）。受限网络下：
+脚本按「`--url` 直链 → 镜像 → gyan.dev（Windows）→ BtbN 每日构建（全平台）→ 用 pnpm 拉 npm 包」的顺序尝试，把二进制放进 `assets/tools/vendor/bin/<平台>-<架构>/` 并写一份 `ffmpeg-path.json`，之后工具完全离线可用。它**不会因为失败而中断安装**（只有 `--strict` 才返回非 0）。受限网络下：
 
 ```bash
-# 走本地代理（脚本会读 HTTPS_PROXY）
+# 走本地代理（http/https 代理会用 CONNECT 隧道，不需要额外依赖；脚本先探测再使用）
 $env:HTTPS_PROXY = "http://127.0.0.1:7897"   # Windows PowerShell
 export HTTPS_PROXY=http://127.0.0.1:7897     # macOS / Linux
 
-# 或者指到自己的镜像目录（目录名须为 <平台>-<架构>.zip，内含 ffmpeg 与 ffprobe）
+# 自己的镜像：目录下需有 <平台>-<架构>.zip（内含 ffmpeg 与 ffprobe）
 node assets/tools/prefetch-ffmpeg.mjs --mirror https://your-mirror.example.com/dsh-ffmpeg
+
+# 或者直接给一个归档直链 / 本地文件
+node assets/tools/prefetch-ffmpeg.mjs --url https://example.com/ffmpeg-build.zip
+node assets/tools/prefetch-ffmpeg.mjs --no-proxy     # 强制直连
 ```
 
-也可以完全不管预取，直接装一份完整版 ffmpeg，或把 `ffmpeg(.exe)`/`ffprobe(.exe)` 手工放进 `assets/tools/vendor/bin/<平台>-<架构>/`。
+实测结论（这台机器 github.com/gyan.dev 均不可达）：
+
+| 路径 | 结果 |
+|---|---|
+| 直连 gyan.dev / GitHub Releases | ❌ 400 / socket hang up（网络层面被挡，非脚本问题） |
+| 经代理的 CONNECT 隧道 | ✅ 探测通过（脚本会在使用前验证并打印 `tunnel verified`） |
+| pnpm + 镜像拉 `ffprobe-static` | ✅ 成功，落盘 60 MB，`ffprobe.exe` 到位 |
+| pnpm + `ffmpeg-static` | ❌ 该包的构建脚本自带下载器不认代理（`ERR_INVALID_PROTOCOL`），pnpm 11 默认也拦截构建脚本 |
+
+所以**代理受限网络**下最省事的是：`winget install Gyan.FFmpeg`，或把已有的 `ffmpeg.exe` 放进 `assets/tools/vendor/bin/win32-x64/`，或设 `DSH_FFMPEG` 指过去。无障碍网络下预取脚本一次跑通两条。
 
 ## 技能怎么用
 
@@ -135,14 +156,15 @@ non_diegetic_music: N/A.
 
 | 项目 | 结果 |
 |---|---|
-| `dsh plugin --profile <name> add <本地路径>` | ✅ exit 0，`dependencies` 与 `dsh.profile.bundles` 自动补上 |
+| `dsh plugin --profile <name> add github:supart/dsh-h3-motion-transfer` | ✅ exit 0，从 GitHub 拉取并自动写入 `dependencies` 与 `dsh.profile.bundles` |
+| `dsh plugin --profile <name> add <本地路径>` | ✅ exit 0，同样自动对齐 |
 | `dsh plugin --profile <name> remove …` | ✅ exit 0，两项自动移除 |
-| `node assets/tools/check.mjs` | ✅ 报出版本 1.2.0、解析到的二进制来源与滤镜清单 |
+| 装好后 `node …/assets/tools/check.mjs` | ✅ 解析到 1.2.0、正确的插件根、二进制来源与滤镜清单 |
 | `node assets/tools/frames.mjs`（抽帧 + 接触表） | ✅ 单元格时间戳与表头正常渲染 |
 | `node assets/tools/verify-sheets.mjs`（3 镜头 / 单镜头） | ✅ 切点红框与 `CUT -> SHOTn` 标签正常；单镜头报 `boundary_sheets: 0` |
-| `node assets/tools/prefetch-ffmpeg.mjs --dry-run` | ✅ 按平台给出下载计划 |
+| 无 ffmpeg 机器的报错文案 | ✅ 列出所有尝试过的位置 + 四条可执行修复步骤 |
 
-**尚未实测**（需要可达网络，请在你的环境里各跑一次）：`prefetch-ffmpeg.mjs` 的真实下载，以及 `add github:<owner>/<repo>` 的 git 安装路径。若 git 安装报错，先确认 `pnpm` 在 PATH 上（DSH 桌面版自带的运行时可能只提供 `pnpm.mjs`，可在 `~/.dsh/profiles/_shim/pnpm.cmd` 放一个包装脚本指向它）。
+**已知前置条件**：插件管理器需要 `pnpm` 与 `git` 在 `PATH` 上；两者都缺时安装会失败（见上文包装脚本的做法）。
 
 ## 许可证
 

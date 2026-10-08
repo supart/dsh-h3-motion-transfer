@@ -11,8 +11,11 @@
 - `--doctor` now reports the resolved font and the plugin version, and warns when
   an ffmpeg build is missing `drawtext` or `tile`.
 - New `assets/tools/prefetch-ffmpeg.mjs`: one-time fetch of ffmpeg/ffprobe into
-  `assets/tools/vendor/bin/<platform>-<arch>/`, trying a mirror, gyan.dev, BtbN
-  nightly builds, then npm packages; honours `HTTPS_PROXY`; never fails an install.
+  `assets/tools/vendor/bin/<platform>-<arch>/`, trying an explicit `--url`, a
+  `--mirror`, gyan.dev, BtbN nightly builds, then the npm packages through pnpm.
+  HTTP proxies are used through a verified CONNECT tunnel built on node:http /
+  node:https (no added dependency); `--no-proxy` forces a direct connection;
+  progress and per-source errors print live; the script never fails an install.
 - New `assets/tools/check.mjs` and the `dsh-h3-motion-check` bin entry: prints
   version, font, binary sources and filter availability, exit code 1 when a
   binary is missing.
