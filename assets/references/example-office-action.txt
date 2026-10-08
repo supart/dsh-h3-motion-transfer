@@ -1,0 +1,28 @@
+subject_definitions:
+<Subject 1> replaces the short-haired man in fitted black leather in <Video 1>. His appearance comes only from <Picture 1>, the capeless Homelander turnaround: short blond hair, clean-shaven face, dark-blue textured superhero suit, gold shoulder pieces and belt, red gloves and boots. Keep this identity in rear, low-angle and close foreground views; no cape or source black leather.
+<Subject 2> replaces the curly-haired, glasses-wearing man in a black jacket, white shirt, loose tie and white shorts in <Video 1>. His appearance comes only from <Picture 2>, the Billy Butcher turnaround: swept-back dark hair, full beard, long black coat, dark patterned shirt, dark trousers and black boots. Do not copy the source glasses, face, white shirt, tie, shorts or bare legs. The image-sheet backgrounds are not scene references.
+<Subject 3> is the bright office from <Video 1>, including desks, chairs, gray floor, ceiling lights and perspective.
+<Subject 4> is the source two-person movement, existing weapon props, low camera angles, cuts and exact timing.
+<Video 1> is the complete 4.50-second thirteenth source segment.
+
+summary:
+[video editing + reference generation] The target video is an edited version of <Video 1>. Replace the short-haired black-leather man with <Subject 1> and the curly-haired man in the black jacket and white shirt with <Subject 2>. Preserve <Subject 3>, transfer <Subject 4> and keep the source shot order and full duration. Neither original actor remains visible.
+
+retention_analysis:
+<Subject 1> (appears in the rear and foreground views): fully_preserved - Homelander's blond hair and capeless blue-and-gold suit from <Picture 1> stay stable.
+<Subject 2> (appears in the floor-level and close views): fully_preserved - Butcher's beard, long black coat, dark trousers and boots from <Picture 2> stay stable.
+<Subject 3> (appears throughout): fully_preserved - keep the office furniture, floor and lighting.
+<Subject 4> (appears throughout): attribute_transfer - transfer the source body paths, weapon placement, camera and cuts to the mapped characters.
+<Video 1> (full 4.50 seconds): partially_preserved - retain its action and timing while replacing both people.
+
+detailed_description:
+Photorealistic character replacement. Keep the source low office-floor camera and remove upper-right creator and platform watermarks.
+[Shot 1] 00:00.000–about 00:02.000: The short-haired black-leather man fills the low rear view and becomes <Subject 1>. Preserve his original movement, framing and the visible weapon prop in its source position. Keep Homelander's capeless blue suit and red boots consistent from behind.
+[Shot 2] Around 00:02.000–00:03.250: Cut to the curly-haired man with glasses on the office floor. He becomes <Subject 2>. Preserve the source camera distance, body movement and expression with Butcher's face, beard, coat and dark trousers.
+[Shot 3] From about 00:03.250 to 00:04.504, preserve the source's two-person low views and final higher angle. The short-haired black-leather source body remains <Subject 1>; the curly-haired glasses-wearing source body remains <Subject 2>, including through the cut near 00:03.792. Keep their positions and timing; end on the original frame.
+
+overall_soundscape:
+N/A.
+
+non_diegetic_music:
+N/A.

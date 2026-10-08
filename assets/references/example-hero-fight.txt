@@ -1,0 +1,28 @@
+subject_definitions:
+<Subject 1> is the replacement for the long-spear fighter in <Video 1>. His appearance comes only from <Picture 1>, the user's three-view yellow character sheet: a smooth tapered yellow head continuous with a broad pear-shaped body, small round green eyes, a thin horizontal smile, a large pale cream belly, long yellow arms with dark gray hands, and tapered yellow legs with dark gray feet. Preserve the exact simple 3D form, proportions, face, and colors across all camera angles. The reference sheet's white background and view labels are not part of the target scene.
+<Subject 2> is the replacement for the short-blade fighter in <Video 1>. His appearance comes only from <Picture 2>, the Feidudu character sheet: a smooth golden-yellow body, a long tapered muzzle, a large dark-brown nose, small eyes, long asymmetrically angled ears, long simple arms, and a large pale cream belly. Preserve this identity, proportions, and colors across all camera angles. The reference sheet's background and panel layout are not part of the target scene.
+<Subject 3> is the wet, dark traditional courtyard from <Video 1>, including the stone paving, steps, walls, railings, lantern structures, architecture, perspective, and desaturated lighting.
+<Subject 4> is the complete two-person fight performance in <Video 1>: the long-spear and short-blade roles, their relative positions, weapon interactions, movement order, pace, and timing.
+<Video 1> is the complete eight-second source video for this second-segment edit, corresponding to source time 00:07–00:15.
+
+summary:
+[video editing + reference generation] The target video is an edited version of <Video 1>. Replace the long-spear fighter with <Subject 1> from <Picture 1> and the short-blade fighter with <Subject 2> from <Picture 2> for the entire eight-second segment. Transfer <Subject 4> to them while preserving <Subject 3>, the original cuts, framing, camera behavior, and uncompressed timing. Neither original human fighter remains visible.
+
+retention_analysis:
+<Subject 1> (appears in [Shot 1], [Shot 2], [Shot 3]): fully_preserved - the tapered yellow silhouette, green eyes, small smile, pale belly, dark gray hands and feet, and three-view proportions from <Picture 1> remain consistent as the long-spear fighter.
+<Subject 2> (appears in [Shot 1], [Shot 2], [Shot 3]): fully_preserved - Feidudu's long ears, tapered muzzle, large brown nose, small eyes, pale belly, and golden-yellow body from <Picture 2> remain consistent as the short-blade fighter.
+<Subject 3> (appears in [Shot 1], [Shot 2], [Shot 3]): fully_preserved - the courtyard, wet paving, architectural depth, perspective, and desaturated light remain.
+<Subject 4> (appears in [Shot 1], [Shot 2], [Shot 3]): attribute_transfer - the source fighters' roles, movements, spacing, weapon contacts, order, and timing transfer to <Subject 1> and <Subject 2>, with only the grip and reach adjustment needed for their nonhuman proportions.
+<Video 1> (full eight seconds): partially_preserved - its scene, shot sequence, camera behavior, weapons, and temporal structure remain while both human performers are replaced.
+
+detailed_description:
+The target preserves the source video's dark, wet courtyard and fast live-action fight structure while rendering both replacement characters as coherent 3D figures within the same space. Keep perspective, contact shadows, ground reflections, and weapon occlusion consistent. Do not create new actions, pauses, cuts, or an ending beyond the source's final frame.
+[Shot 1] The source's opening medium fight view shows <Subject 1>, the green-eyed tapered yellow character, facing the camera with the long spear, while <Subject 2>, the long-eared golden Feidudu, occupies the near foreground with the short blade. They perform the exact opening exchange of <Subject 4> in <Subject 3>. The spear and blade cross the frame with the original timing and camera movement. Keep each character's identity stable through motion blur and partial occlusion.
+[Shot 2] At approximately 00:01.750, follow the source cut to a close view emphasizing <Subject 2> and the passing short blade, with parts of <Subject 1> and the spear crossing the foreground. Maintain the source's tight perspective, rapid exchange, reactions, and shot duration. The close view must show Feidudu's long ears, tapered muzzle, and large brown nose, rather than the original human face; the foreground spear wielder remains <Subject 1> whenever visible.
+[Shot 3] At approximately 00:05.000, follow the source cut back to a wider two-person fight view. <Subject 1> continues in the long-spear role and <Subject 2> continues in the short-blade role as they exchange positions and weapons in the courtyard. Preserve the original camera framing and the exact sequence and pace of <Subject 4> through 00:08.000. The fight is still in progress at the final frame; do not invent a hit, fall, victory, or extra closing pose.
+
+overall_soundscape:
+N/A.
+
+non_diegetic_music:
+N/A.

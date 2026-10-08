@@ -1,0 +1,27 @@
+# dependencies and installed plugins
+node_modules/
+pnpm-lock.yaml
+package-lock.json
+
+# fetched ffmpeg/ffprobe binaries (see assets/tools/prefetch-ffmpeg.mjs)
+assets/tools/vendor/
+assets/tools/ffmpeg-path.json
+
+# review artifacts produced by the tools
+.h3work/
+*.frames/
+verify/
+
+# source media never belongs in the repository
+*.mp4
+*.mov
+*.mkv
+*.webm
+*.wav
+*.mp3
+*.gif
+
+# local noise
+*.log
+.DS_Store
+Thumbs.db

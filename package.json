@@ -1,0 +1,50 @@
+{
+  "name": "dsh-h3-motion-transfer",
+  "version": "1.2.0",
+  "private": false,
+  "type": "module",
+  "description": "Installable DSH bundle: MiniMax H3 Ref2VA motion-transfer prompt skill (skill name h3-compact-motion-transfer), with frame-extraction and cut-verification tools.",
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "minimax",
+    "h3",
+    "ref2va",
+    "motion-transfer",
+    "prompt",
+    "skill"
+  ],
+  "license": "MIT",
+  "exports": {
+    ".": "./index.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./assets/tools/*": "./assets/tools/*",
+    "./assets/SKILL.md": "./assets/SKILL.md",
+    "./locale/*.json": "./locale/*.json",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "assets",
+    "locale",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "bin": {
+    "dsh-h3-motion-check": "./assets/tools/check.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "check": "node assets/tools/check.mjs",
+    "prefetch": "node assets/tools/prefetch-ffmpeg.mjs"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

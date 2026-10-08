@@ -1,0 +1,6 @@
+# MiniMax H3 Ref2VA motion-transfer prompt skill.
+# One Host row; the plugin publishes the skill into the global skill layer so
+# every agent preset can load it without filesystem discovery.
+- insert:
+    - id: h3-motion-transfer
+      name: 'dsh-h3-motion-transfer'
